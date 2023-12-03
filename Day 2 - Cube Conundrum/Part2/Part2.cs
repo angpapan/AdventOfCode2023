@@ -15,13 +15,15 @@
                 string gameInfo= line.Split(':')[1];
 
                 string[] tries = gameInfo.Split(';');
-                bool valid = true;
+                int maxRed = 0;
+                int maxGreen = 0;
+                int maxBlue = 0;
+
                 foreach(string attempt in tries)
                 {
                     string[] balls = attempt.Split(',');
-                    bool validAttempt = true;
 
-                    foreach(string ball in balls)
+                    foreach (string ball in balls)
                     {
                         string trimmedBall = ball.Trim();
                         string[] info = trimmedBall.Split(' ');
@@ -32,28 +34,18 @@
                         switch (ballsColor)
                         {
                             case "red":
-                                validAttempt = ballsNumber <= MaxValues.RED;
+                                if(ballsNumber > maxRed) maxRed = ballsNumber;
                                 break;
                             case "green":
-                                validAttempt = ballsNumber <= MaxValues.GREEN;
+                                if (ballsNumber > maxGreen) maxGreen = ballsNumber;
                                 break;
                             case "blue":
-                                validAttempt = ballsNumber <= MaxValues.BLUE;
+                                if (ballsNumber > maxBlue) maxBlue = ballsNumber;
                                 break;
                         }
-
-                        if (!validAttempt) break;
                     }
-
-                    if (!validAttempt)
-                    {
-                        valid = false;
-                        break;
-                    }
-
                 }
-
-                if (valid) sum += i + 1;
+                sum += maxRed * maxGreen * maxBlue;
             }
 
             return sum;

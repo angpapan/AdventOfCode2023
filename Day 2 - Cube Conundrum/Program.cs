@@ -1,5 +1,6 @@
 ﻿using Day_2___Cube_Conundrum.Part1;
+using Day_2___Cube_Conundrum.Part2;
 
-int result = Part1.Solve("input.txt");
+int result = Part2.Solve("input.txt");
 
 Console.WriteLine(result);
